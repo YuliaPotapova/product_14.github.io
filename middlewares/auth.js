@@ -7,7 +7,7 @@ module.exports = (req, res, next) => {
   if (!token) return handleAuthError(res);
   let payload;
   try {
-    payload = jwt.verify(token, process.env.JWT_SECRET);
+    payload = jwt.verify(token, (process.env.JWT_SECRET || 'dev-secret'));
   } catch (err) {
     return handleAuthError(res);
   }
