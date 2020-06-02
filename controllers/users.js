@@ -25,6 +25,10 @@ module.exports.createUser = (req, res) => {
   const {
     name, about, avatar, email, password,
   } = req.body;
+  if (!name.trim().length) {
+    res.status(400).send({ message: 'Имя пользователя не должно быть пустым или состоять из одних пробелов' });
+    return;
+  }
   if (password.length < 8) {
     res.status(400).send({ message: 'Длина пароля должна быть не менее 8 символов' });
     return;
